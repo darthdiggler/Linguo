@@ -1,14 +1,9 @@
 
-import os
-import re
-import pypdf
-import pickle
-from datetime import datetime
-from deep_translator import GoogleTranslator
+import csv
 
 
 class Flashcards:
-    """PDF Reader will extract the text from all of the pdf files within a directory.
+    """This will convert data into Anki flashcards in various ways
 
     German to English language conversions were done through https://www.onlinedoctranslator.com/app/translationprocess-pdf
 
@@ -20,67 +15,24 @@ class Flashcards:
 
     Attributes:
         root_dir (str): Path to root directory containing all of the pdf documents to extract.
-        pdf_list (list(tuple))): List of tuples information extracted from pdf files.
     """
     def __init__(self, file):
-        # Check root directory path
-        if not os.path.isfile(file):
-            print("Not a proper directory path.")
-            return
-        self.file = file
-        self.flashcards = self.extract_data(self.file)
-        self.save_flashcards(self.flashcards, "English_Flashcards")
-        self.spanish_cards = self.translate_flashcards(self.flashcards, 'es')
-        self.save_flashcards(self.spanish_cards, "Spanish_Flashcards")
-        self.german_cards = self.translate_flashcards(self.flashcards, 'de')
-        self.save_flashcards(self.spanish_cards, "German_Flashcards")
+        pass
 
+    def create_anki_flashcard(self, word_pairs, filename='anki_flashcards.csv'):
+        """
+        Takes a list of word pairs and generates a CSV file formatted for Anki.
 
+        :param word_pairs: List of tuples, where each tuple contains two values (front and back of the card).
+        :param filename: The name of the output CSV file.
+        """
+        # Open the file in write mode
+        with open(filename, mode='w', newline='', encoding='utf-8') as file:
+            writer = csv.writer(file)
 
-    def extract_data(self, file):
-        fcards = {}
-        name = 'Non-Group'
-        fcards[name] = []
-        freader = open(file)
-        data = freader.readlines()
-        for line in data:
-            line = line.replace('\n', '')
-            # Check line not empty
-            if not line:
-                continue
-            # Create flashcard group
-            if line[0] == '/':
-                name = line[1:]
-                fcards[name] = []
-                continue
-            # Add word to flashcard group
-            # line = line.replace(' ', '')
-            if line[-1] == ',':
-                line = line[:-1]
-            words = line.split(',')
-            fcards[name].extend(words)
-        if not fcards['Non-Group']:
-            del fcards['Non-Group']
-        return fcards
-
-    def translate_flashcards(self, fcards, output_lang):
-        input_lang = 'en'
-        new_fcards = {}
-        count = 1
-        total = str(len(fcards))
-        for key in fcards:
-            new_fcards[key] = []
-            print(str(datetime.now()) + ":\tTranslating '" + str(key) + "' w/ " + str(len(fcards[key])) + " words")
-            new_fcards[key].extend(GoogleTranslator(output_lang, input_lang).translate_batch(fcards[key]))
-            print(str(datetime.now()) + ":\tCompletion: " + str(count) + "/" + total)
-            count += 1
-        return new_fcards
-
-    def save_flashcards(self, fcards, filename):
-        fname = "C:/Projects/PyCharm/MBV_Docs/.venv/App/LearnLang/" + filename + ".pkl"
-        with open(fname, 'wb') as file:
-            pickle.dump(fcards, file)
+            # Write each word pair (front and back) as a row
+            for front, back in word_pairs:
+                writer.writerow([front, back])
 
 if __name__ == "__main__":
-    pdf = Flashcards("/App/LearnLang/Ogdens_Words.txt")
     pass
