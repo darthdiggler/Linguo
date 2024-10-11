@@ -1,0 +1,46 @@
+jump the step -> saltar el paso
+to jump -> saltar
+to drive -> conducir
+electrical -> electrica
+signal -> senal (enya)
+safety signal -> seguridad
+clamps
+actuator -> solenoide
+rollers -> rodillos
+lifter -> levantadoras 
+gripper -> pinza
+pins -> patas
+position -> posicion
+van -> la camioneta
+sensor -> sensor
+proximity sensor -> proximidad sensor
+laser -> laser
+scanner -> el barrido
+station -> estacion
+sequence -> secuencia
+robot -> robot
+to think -> pensar
+air -> aire
+to stop -> parar
+to close -> cerrar
+to open -> abrir
+measurement -> la medicion
+direction -> direccion
+fault -> falla
+warning -> advertencia
+collision -> collision
+turn on -> encender
+turn off -> apagar
+activate -> activar
+bypass -> derivacion
+to crash -> chocar
+the crash -> el choque
+logic -> logica
+rack -> estante
+memory stick -> tarjeta de memoria
+password -> contraseña
+key -> llave
+call -> llamar
+noise -> ruido
+loud -> alto or alto
+pneumatic -> neumática or neumático
